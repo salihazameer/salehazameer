@@ -1870,9 +1870,9 @@
       .ticker-track { animation: none; }
     }
 
-	        /* ===== MOBILE HERO IMAGE ===== */
+	      /* ===== MOBILE HERO IMAGE (Full-width banner) ===== */
     .hero-mobile-img {
-      display: none;
+      display: none; /* ← HIDDEN ON DESKTOP */
       margin: 24px 0 32px;
       border-radius: 20px;
       overflow: hidden;
@@ -1885,15 +1885,9 @@
       display: block;
     }
 
-    @media (max-width: 1024px) {
-      .hero-mobile-img {
-        display: block;
-      }
-    }
-
-    /* ===== ADD THIS: MOBILE AVATAR (Circular) ===== */
+    /* ===== MOBILE AVATAR (Circular Profile) ===== */
     .hero-avatar-mobile {
-      display: none;
+      display: none; /* ← HIDDEN ON DESKTOP */
       width: 150px;
       height: 150px;
       border-radius: 50%;
@@ -1916,7 +1910,11 @@
       display: block;
     }
 
+    /* ✅ SHOW BOTH ONLY ON MOBILE (under 1024px) */
     @media (max-width: 1024px) {
+      .hero-mobile-img {
+        display: block;
+      }
       .hero-avatar-mobile {
         display: block;
       }
