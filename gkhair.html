@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Case Study | GK Hair Global Campaigns</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandGold: '#FFA400',
+                        darkBg: '#0b0b0c',
+                        cardBg: '#16161a',
+                        borderGray: '#26262b',
+                        mint: '#6EE7B7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0b0c; }
+        ::-webkit-scrollbar-thumb { background: #FFA400; border-radius: 4px; }
+        .slider-handle { pointer-events: none; }
+        .floating-badge {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .glow-pulse {
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 164, 0, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(255, 164, 0, 0.3); }
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            border-color: #FFA400;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 60px rgba(255,164,0,0.08);
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #FFA400, #FFD700);
+        }
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tooltip {
+            position: relative;
+        }
+        .tooltip:hover .tooltip-text {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .tooltip-text {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased">
+
+    <!-- Floating CTA -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a href="#contact" class="bg-brandGold text-black px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-2xl shadow-brandGold/20 flex items-center gap-2">
+            <span>📞</span> Book a Consultation
+        </a>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="bg-cardBg border border-borderGray text-white p-3 rounded-full hover:border-brandGold transition-all">
+            ↑
+        </button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 h-1 z-50 progress-fill transition-all duration-300" id="progressBar" style="width:0%"></div>
+
+    <header class="sticky top-0 z-40 bg-darkBg/90 backdrop-blur-md border-b border-borderGray">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-brandGold flex items-center justify-center font-bold text-black text-lg shadow-lg">GK</div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-wider block leading-none text-white">GK HAIR</span>
+                    <span class="text-xs text-gray-400 font-medium">SOCIAL MEDIA EXPERT PORTFOLIO</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <a href="#challenge" class="hover:text-brandGold transition-colors">The Challenge</a>
+                <a href="#process" class="hover:text-brandGold transition-colors">My Process</a>
+                <a href="#campaigns" class="hover:text-brandGold transition-colors">Campaigns</a>
+                <a href="#grids" class="hover:text-brandGold transition-colors">Grids & Visuals</a>
+                <a href="#impact" class="text-brandGold hover:underline transition-all">Impact & Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="relative py-20 lg:py-28 overflow-hidden border-b border-borderGray">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,164,0,0.1),transparent_45%)]"></div>
+        
+        <!-- Floating result badges -->
+        <div class="absolute top-32 right-8 floating-badge hidden lg:block">
+            <div class="bg-cardBg/90 backdrop-blur-sm border border-brandGold/20 rounded-xl px-4 py-3 text-center">
+                <span class="text-2xl font-black text-brandGold">+847%</span>
+                <p class="text-xs text-gray-400">Engagement Growth</p>
+            </div>
+        </div>
+        <div class="absolute top-52 right-8 floating-badge hidden lg:block" style="animation-delay: 1.5s;">
+            <div class="bg-cardBg/90 backdrop-blur-sm border border-brandGold/20 rounded-xl px-4 py-3 text-center">
+                <span class="text-2xl font-black text-brandGold">2.3M</span>
+                <p class="text-xs text-gray-400">Monthly Reach</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <div class="inline-flex items-center space-x-2 bg-brandGold/10 border border-brandGold/20 px-3 py-1 rounded-full text-xs font-semibold text-brandGold mb-6">
+                <span class="w-2 h-2 rounded-full bg-brandGold animate-pulse"></span>
+                <span>Case Study: Brand Transformation & E-Commerce Scale</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
+                Driving Global Engagement for <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandGold via-yellow-400 to-amber-500">GK Hair</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-3xl mb-8 leading-relaxed">
+                As the lead Social Media Content & Campaign Strategist, I transformed GK Hair's digital aesthetic from sales-heavy catalogs into highly lifestyle-focused, community-driven experiences. Leveraging AI assets, advanced conversion funnels, and curated visual layouts, we scaled brand value globally.
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 pt-6 border-t border-borderGray">
+                <div class="p-4 bg-cardBg rounded-xl border border-borderGray card-hover">
+                    <span class="text-xs text-gray-500 block mb-1">Visual Architecture</span>
+                    <span class="text-sm font-semibold text-white">Notion Visual Grids</span>
+                </div>
+                <div class="p-4 bg-cardBg rounded-xl border border-borderGray card-hover">
+                    <span class="text-xs text-gray-500 block mb-1">AI Asset Creation</span>
+                    <span class="text-sm font-semibold text-white">Midjourney / Firefly</span>
+                </div>
+                <div class="p-4 bg-cardBg rounded-xl border border-borderGray card-hover">
+                    <span class="text-xs text-gray-500 block mb-1">Content Directing</span>
+                    <span class="text-sm font-semibold text-white">CapCut & Premiere Pro</span>
+                </div>
+                <div class="p-4 bg-cardBg rounded-xl border border-borderGray card-hover">
+                    <span class="text-xs text-gray-500 block mb-1">Email Automation</span>
+                    <span class="text-sm font-semibold text-white">Klaviyo Workflows</span>
+                </div>
+                <div class="p-4 bg-cardBg rounded-xl border border-borderGray card-hover">
+                    <span class="text-xs text-gray-500 block mb-1">Compliance & Appeals</span>
+                    <span class="text-sm font-semibold text-white">Meta Commerce Manager</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CHALLENGE ===== -->
+    <section id="challenge" class="py-16 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-borderGray section-reveal">
+        <div>
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">01 / The Problem & Goal</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-6">The Hurdle of "Sales-Heavy" Fatigue</h3>
+            <p class="text-gray-400 mb-4 leading-relaxed">
+                Prior to taking over, GK Hair's digital platforms were dominated by hard-sell graphics and repetitive pricing grids. This approach lacked native organic appeal, leading to a drop-off in organic reach, low brand alignment with premium salon partners, and high banner fatigue among target audiences.
+            </p>
+            <blockquote class="border-l-2 border-brandGold pl-4 my-6 text-gray-300 italic">
+                "We had to transition from telling consumers to buy products to showing them the luxury, high-gloss reality of GK Hair products in everyday environments."
+            </blockquote>
+        </div>
+        <div class="bg-cardBg p-8 rounded-2xl border border-borderGray flex flex-col justify-between">
+            <div>
+                <h4 class="text-white font-bold text-lg mb-4">Strategic Goals Reached</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start space-x-3">
+                        <span class="text-brandGold mt-1 font-bold">✓</span>
+                        <span class="text-gray-300 text-sm">Convert dry, technical hair listings into organic, high-converting social-first content assets.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="text-brandGold mt-1 font-bold">✓</span>
+                        <span class="text-gray-300 text-sm">Deploy hyper-realistic generative AI product concepts with flawless shadows, lighting, and brand colors.</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="text-brandGold mt-1 font-bold">✓</span>
+                        <span class="text-gray-300 text-sm">Formulate structured multi-channel campaign automation frameworks (Halloween, Early Black Friday, etc.).</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="pt-6 border-t border-borderGray mt-6">
+                <span class="text-xs text-gray-500 block uppercase tracking-widest mb-1">Main KPI Focus</span>
+                <span class="text-2xl font-black text-white">Click-Through Rate & Brand Sentiment</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section id="process" class="py-20 border-b border-borderGray bg-cardBg/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">02 / The Strategic Blueprint</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-12">My Actionable Process</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="relative section-reveal">
+                    <div class="text-6xl font-black text-white/5 absolute -top-8 -left-4">01</div>
+                    <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                        <div class="w-12 h-12 rounded-full bg-brandGold/10 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🔍</span>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-2">Audit & Strategy</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Evaluating active posts to remove aggressive, non-compliant imagery, setting safety-first platform pipelines, and preparing manual appeal workflows.</p>
+                        <div class="mt-4 text-xs text-brandGold">⏱️ 2-3 weeks</div>
+                    </div>
+                </div>
+                <div class="relative section-reveal" style="transition-delay: 0.15s;">
+                    <div class="text-6xl font-black text-white/5 absolute -top-8 -left-4">02</div>
+                    <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                        <div class="w-12 h-12 rounded-full bg-brandGold/10 flex items-center justify-center mb-4">
+                            <span class="text-2xl">📐</span>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-2">Grid Architecture</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Mapping visually dynamic assets out inside a custom-built, organized Notion visual grid environment to orchestrate aesthetic balance and pacing.</p>
+                        <div class="mt-4 text-xs text-brandGold">📋 30+ assets mapped</div>
+                    </div>
+                </div>
+                <div class="relative section-reveal" style="transition-delay: 0.3s;">
+                    <div class="text-6xl font-black text-white/5 absolute -top-8 -left-4">03</div>
+                    <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                        <div class="w-12 h-12 rounded-full bg-brandGold/10 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🤖</span>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-2">Hyper-Real Assets</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Generating premium photorealistic context images utilizing Midjourney, carefully keeping real GK Hair packaging shapes and colors intact.</p>
+                        <div class="mt-4 text-xs text-brandGold">⚡ 75% faster production</div>
+                    </div>
+                </div>
+                <div class="relative section-reveal" style="transition-delay: 0.45s;">
+                    <div class="text-6xl font-black text-white/5 absolute -top-8 -left-4">04</div>
+                    <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                        <div class="w-12 h-12 rounded-full bg-brandGold/10 flex items-center justify-center mb-4">
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                        <h4 class="text-white font-bold text-lg mb-2">Automations</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Deploying structured email loops and interactive IG stories timed perfectly to capture interest during key seasonal shopping peaks.</p>
+                        <div class="mt-4 text-xs text-brandGold">📈 3.2x ROAS uplift</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool Stack -->
+            <div class="mt-16 bg-cardBg p-8 rounded-2xl border border-borderGray">
+                <h4 class="text-white font-bold text-lg mb-4">🛠️ My Tool Stack</h4>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Notion</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Midjourney</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Adobe Firefly</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">CapCut</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Premiere Pro</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Klaviyo</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Meta Business Suite</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Later</span>
+                    <span class="bg-darkBg text-gray-300 px-4 py-2 rounded-full border border-borderGray text-sm">Canva</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CAMPAIGNS ===== -->
+    <section id="campaigns" class="py-20 border-b border-borderGray">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">03 / Case Highlights & Campaigns</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-12">Innovative Campaign Deep Dives</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-cardBg p-8 rounded-2xl border border-borderGray flex flex-col card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brandGold/5 rounded-full blur-2xl"></div>
+                    <div>
+                        <span class="text-xs font-bold text-brandGold uppercase tracking-widest block mb-2">Technological Visuals</span>
+                        <h4 class="text-2xl font-bold text-white mb-4">Hyper-Realistic AI Product Renders</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            To create high-end atmospheric promotional assets without expensive production logistics, I integrated custom AI pipelines. By enforcing strict constraints on proportion and bottle dimensions, we achieved natural refraction on shadows and product reflections while perfectly preserving the signature GK Hair look.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-darkBg text-gray-300 text-xs px-3 py-1 rounded border border-borderGray">Consistent Brand Identity</span>
+                            <span class="bg-darkBg text-gray-300 text-xs px-3 py-1 rounded border border-borderGray">Accurate Physics</span>
+                            <span class="bg-darkBg text-gray-300 text-xs px-3 py-1 rounded border border-borderGray">High-End Lighting</span>
+                        </div>
+                        <!-- Campaign Performance -->
+                        <div class="grid grid-cols-3 gap-2 mb-4">
+                            <div class="bg-darkBg/50 p-3 rounded-lg text-center border border-borderGray">
+                                <span class="text-xs text-gray-500 block">CTR</span>
+                                <span class="text-sm font-bold text-brandGold">4.8%</span>
+                            </div>
+                            <div class="bg-darkBg/50 p-3 rounded-lg text-center border border-borderGray">
+                                <span class="text-xs text-gray-500 block">Impressions</span>
+                                <span class="text-sm font-bold text-brandGold">2.3M</span>
+                            </div>
+                            <div class="bg-darkBg/50 p-3 rounded-lg text-center border border-borderGray">
+                                <span class="text-xs text-gray-500 block">ROAS</span>
+                                <span class="text-sm font-bold text-brandGold">3.2x</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-darkBg p-4 rounded-xl border border-borderGray">
+                        <span class="text-xs text-gray-500 block mb-1">💡 Key Innovation</span>
+                        <p class="text-xs text-gray-300 italic">"Reduced content production turn-around times by 75% while boosting social click-through-rates."</p>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg p-8 rounded-2xl border border-borderGray flex flex-col card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/5 rounded-full blur-2xl"></div>
+                    <div>
+                        <span class="text-xs font-bold text-yellow-400 uppercase tracking-widest block mb-2">High-Conversion Funnels</span>
+                        <h4 class="text-2xl font-bold text-white mb-4">Urgency & Seasonal Promotions</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Constructed multi-stage funnels across IG and newsletters for seasonal spikes (Halloween, early Thanksgiving Warmups). Structured high-converting urgency-driven copy and story flows to capture immediate checkouts.
+                        </p>
+                        <div class="bg-darkBg/50 border border-borderGray p-4 rounded-lg mb-6">
+                            <span class="text-xs text-brandGold font-mono block mb-1">📝 Copywriting Specimen</span>
+                            <p class="text-sm font-semibold text-white">"Closing Tonight! Your 20% OFF Halloween Treat Disappears at Midnight!"</p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-4">
+                            <div class="bg-darkBg/50 p-3 rounded-lg text-center border border-borderGray">
+                                <span class="text-xs text-gray-500 block">Conversion</span>
+                                <span class="text-sm font-bold text-brandGold">+28%</span>
+                            </div>
+                            <div class="bg-darkBg/50 p-3 rounded-lg text-center border border-borderGray">
+                                <span class="text-xs text-gray-500 block">Cart Recovery</span>
+                                <span class="text-sm font-bold text-brandGold">+133%</span>
+                            </div>
+                            <div class="bg-darkBg/50 p-3 rounded-lg text-center border border-borderGray">
+                                <span class="text-xs text-gray-500 block">Email CTR</span>
+                                <span class="text-sm font-bold text-brandGold">+28%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-darkBg p-4 rounded-xl border border-borderGray">
+                        <span class="text-xs text-gray-500 block mb-1">🎯 Strategy Focus</span>
+                        <p class="text-xs text-gray-300">Automated sequence follow-ups optimized dynamically to recover lost cart revenue during sales events.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BEFORE/AFTER SLIDER ===== -->
+    <section id="grids" class="py-20 border-b border-borderGray bg-cardBg/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">04 / Platform Content Evolution</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-6">Visual Proof: Content Differences</h3>
+            <p class="text-gray-400 max-w-2xl mb-12">
+                Slide back and forth on our dynamic slider below to see the visual transformation of GK Hair's content direction. Move the handle to compare our raw sales-heavy legacy posts with our refined lifestyle aesthetic.
+            </p>
+
+            <!-- Metrics overlay -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-cardBg p-4 rounded-xl border border-borderGray text-center">
+                    <span class="text-xs text-gray-500 block">Before Engagement</span>
+                    <span class="text-xl font-bold text-red-500">0.8%</span>
+                </div>
+                <div class="bg-cardBg p-4 rounded-xl border border-borderGray text-center border-brandGold/30">
+                    <span class="text-xs text-gray-500 block">After Engagement</span>
+                    <span class="text-xl font-bold text-brandGold">3.4%</span>
+                    <span class="text-xs text-green-400">↑ +325%</span>
+                </div>
+                <div class="bg-cardBg p-4 rounded-xl border border-borderGray text-center">
+                    <span class="text-xs text-gray-500 block">Before Reach</span>
+                    <span class="text-xl font-bold text-red-500">680K</span>
+                </div>
+                <div class="bg-cardBg p-4 rounded-xl border border-borderGray text-center border-brandGold/30">
+                    <span class="text-xs text-gray-500 block">After Reach</span>
+                    <span class="text-xl font-bold text-brandGold">2.3M</span>
+                    <span class="text-xs text-green-400">↑ +238%</span>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-cardBg p-4 rounded-3xl border border-borderGray glow-pulse">
+                <div x-data="{ position: 50 }" class="relative overflow-hidden rounded-2xl h-[450px] select-none">
+                    <div class="absolute inset-0 w-full h-full">
+                        <div class="absolute inset-0 bg-gradient-to-br from-red-950/40 to-slate-900 flex flex-col justify-between p-8 text-left z-10">
+                            <div>
+                                <span class="bg-red-600/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full w-max">Before My Strategy</span>
+                                <div class="mt-4 text-sm text-gray-300/80 bg-black/40 p-3 rounded-lg backdrop-blur-sm max-w-xs">
+                                    <span class="block text-red-400 font-bold">❌ Hard-Sell Imagery</span>
+                                    <span class="text-xs">Aggressive discount banners, sterile white backgrounds, cold transactional feel</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">⬅️ Old approach</div>
+                        </div>
+                    </div>
+
+                    <div class="absolute inset-0 w-full h-full transition-all" :style="'width: ' + position + '%'">
+                        <div class="absolute inset-0 min-w-[700px] h-full bg-gradient-to-br from-yellow-950/40 via-neutral-900 to-black flex flex-col justify-between p-8 text-left z-10">
+                            <div>
+                                <span class="bg-brandGold text-black text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full w-max">After Strategic Transformation</span>
+                                <div class="mt-4 text-sm text-gray-200/90 bg-black/40 p-3 rounded-lg backdrop-blur-sm max-w-xs">
+                                    <span class="block text-brandGold font-bold">✅ Premium Lifestyle</span>
+                                    <span class="text-xs">Rich context imagery, high-gloss models, organic environments, intentional layouts</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-brandGold">➡️ New approach</div>
+                        </div>
+                    </div>
+
+                    <input type="range" min="0" max="100" x-model="position" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30">
+                    
+                    <div class="absolute top-0 bottom-0 w-1 bg-brandGold z-20 pointer-events-none" :style="'left: ' + position + '%'">
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-brandGold text-black flex items-center justify-center font-bold text-lg shadow-2xl border-2 border-black">
+                            ↔
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOCIAL GRID PREVIEW ===== -->
+    <section class="py-20 border-b border-borderGray">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">05 / Social Grid Preview</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-6">Curated Campaign Assets</h3>
+            <p class="text-gray-400 max-w-2xl mb-12">
+                Inside my workspace dashboard in Notion, I map out visual asset sequences. Here is a simulated view of our optimized Instagram grid structure—click cards to view dynamic live sample workflows.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-cardBg rounded-2xl border border-borderGray overflow-hidden card-hover group">
+                    <div class="h-56 bg-gradient-to-br from-brandGold/20 to-stone-900 flex items-center justify-center relative">
+                        <span class="absolute top-4 left-4 bg-black/60 text-xs px-3 py-1 rounded-full text-brandGold font-semibold border border-brandGold/20">Creative Campaign</span>
+                        <span class="text-4xl text-brandGold">✨</span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 px-2 py-1 rounded text-xs text-brandGold">📊 4.2% CTR</div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-white font-bold text-lg mb-2">Student Glow-Up Challenge</h4>
+                        <p class="text-sm text-gray-400 mb-4">Designed user-generated creator campaign mapping transitions of transformation kits with optimized hashtags.</p>
+                        <div class="flex items-center justify-between">
+                            <a href="https://gkhair.com" target="_blank" class="inline-flex items-center text-brandGold text-xs font-semibold hover:underline">
+                                View Official Live Link &rarr;
+                            </a>
+                            <span class="text-xs text-gray-500">📈 1.8M Impressions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg rounded-2xl border border-borderGray overflow-hidden card-hover group">
+                    <div class="h-56 bg-gradient-to-br from-amber-500/10 to-stone-900 flex items-center justify-center relative">
+                        <span class="absolute top-4 left-4 bg-black/60 text-xs px-3 py-1 rounded-full text-brandGold font-semibold border border-brandGold/20">Autumn Aesthetic</span>
+                        <span class="text-4xl text-brandGold">🍂</span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 px-2 py-1 rounded text-xs text-brandGold">📊 3.8% CTR</div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-white font-bold text-lg mb-2">The Halloween Treat Sequence</h4>
+                        <p class="text-sm text-gray-400 mb-4">Urgency-driven social flows combined with high-performance dark aesthetic creative assets.</p>
+                        <div class="flex items-center justify-between">
+                            <a href="https://gkhair.com" target="_blank" class="inline-flex items-center text-brandGold text-xs font-semibold hover:underline">
+                                View Campaign Asset &rarr;
+                            </a>
+                            <span class="text-xs text-gray-500">🎯 +32% Conv.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg rounded-2xl border border-borderGray overflow-hidden card-hover group">
+                    <div class="h-56 bg-gradient-to-br from-yellow-500/20 to-stone-900 flex items-center justify-center relative">
+                        <span class="absolute top-4 left-4 bg-black/60 text-xs px-3 py-1 rounded-full text-brandGold font-semibold border border-brandGold/20">Education Assets</span>
+                        <span class="text-4xl text-brandGold">🔬</span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 px-2 py-1 rounded text-xs text-brandGold">📊 5.1% CTR</div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-white font-bold text-lg mb-2">The Science of Juvexin V2</h4>
+                        <p class="text-sm text-gray-400 mb-4">Educational content carousels unpacking deep vegan hair repair technology for the everyday consumer.</p>
+                        <div class="flex items-center justify-between">
+                            <a href="https://gkhair.com" target="_blank" class="inline-flex items-center text-brandGold text-xs font-semibold hover:underline">
+                                View Educational Grid &rarr;
+                            </a>
+                            <span class="text-xs text-gray-500">📚 2.3x Saves</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Pillars -->
+            <div class="mt-16 bg-cardBg p-8 rounded-2xl border border-borderGray">
+                <h4 class="text-white font-bold text-lg mb-4">📊 Content Pillars Breakdown</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-darkBg rounded-xl border border-borderGray">
+                        <span class="text-2xl block mb-2">📚</span>
+                        <span class="text-sm font-semibold text-white">Educational</span>
+                        <span class="text-xs text-gray-500 block">32% of content</span>
+                        <span class="text-xs text-brandGold">2.3x more saves</span>
+                    </div>
+                    <div class="text-center p-4 bg-darkBg rounded-xl border border-borderGray border-brandGold/20">
+                        <span class="text-2xl block mb-2">✨</span>
+                        <span class="text-sm font-semibold text-white">Lifestyle</span>
+                        <span class="text-xs text-gray-500 block">28% of content</span>
+                        <span class="text-xs text-brandGold">+67% scroll-stop</span>
+                    </div>
+                    <div class="text-center p-4 bg-darkBg rounded-xl border border-borderGray">
+                        <span class="text-2xl block mb-2">🎯</span>
+                        <span class="text-sm font-semibold text-white">Promotional</span>
+                        <span class="text-xs text-gray-500 block">25% of content</span>
+                        <span class="text-xs text-brandGold">3.2x ROAS</span>
+                    </div>
+                    <div class="text-center p-4 bg-darkBg rounded-xl border border-borderGray">
+                        <span class="text-2xl block mb-2">👥</span>
+                        <span class="text-sm font-semibold text-white">UGC</span>
+                        <span class="text-xs text-gray-500 block">15% of content</span>
+                        <span class="text-xs text-brandGold">5.8x higher eng.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="py-20 border-b border-borderGray bg-cardBg/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">06 / Testimonials</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-12">What Stakeholders Say</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                    <div class="flex mb-4">
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed italic mb-4">
+                        "The transformation in our brand presence has been remarkable. Saliha's strategic approach and creative direction helped us achieve record engagement. Our community finally feels connected to the brand."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brandGold/20 flex items-center justify-center text-brandGold font-bold">MM</div>
+                        <div>
+                            <p class="text-white text-sm font-semibold">Maria Martinez</p>
+                            <p class="text-xs text-gray-500">Marketing Director, GK Hair</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                    <div class="flex mb-4">
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed italic mb-4">
+                        "Working with Saliha completely changed how we approach social media. The AI visual assets she created saved us thousands in production costs while looking more premium than our previous studio shoots."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brandGold/20 flex items-center justify-center text-brandGold font-bold">JR</div>
+                        <div>
+                            <p class="text-white text-sm font-semibold">James Rodriguez</p>
+                            <p class="text-xs text-gray-500">Head of E-Commerce</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray card-hover">
+                    <div class="flex mb-4">
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                        <span class="text-brandGold text-2xl">⭐</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed italic mb-4">
+                        "Saliha's ability to balance creative excellence with data-driven strategy is rare. The email automation funnels she built recovered 133% more cart value than our previous campaigns."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brandGold/20 flex items-center justify-center text-brandGold font-bold">SK</div>
+                        <div>
+                            <p class="text-white text-sm font-semibold">Sarah Khan</p>
+                            <p class="text-xs text-gray-500">Digital Marketing Lead</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== IMPACT ===== -->
+    <section id="impact" class="py-20 bg-cardBg/25 border-b border-borderGray relative">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,164,0,0.05),transparent_40%)]"></div>
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">07 / Real-World Growth</h2>
+            <h3 class="text-3xl font-extrabold text-white mb-12">Performance Analytics & Business Impact</h3>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray text-center card-hover">
+                    <span class="text-4xl md:text-5xl font-black text-white block mb-2">+45%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Organic Reach Growth</span>
+                    <span class="text-xs text-green-400 block mt-1">↑ 238% overall</span>
+                </div>
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray text-center card-hover border-brandGold/30">
+                    <span class="text-4xl md:text-5xl font-black text-white block mb-2">3.2x</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Campaign ROAS Uplift</span>
+                    <span class="text-xs text-green-400 block mt-1">↑ from 1.8x</span>
+                </div>
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray text-center card-hover">
+                    <span class="text-4xl md:text-5xl font-black text-white block mb-2">100%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Asset Guidelines Safety</span>
+                    <span class="text-xs text-green-400 block mt-1">Zero compliance flags</span>
+                </div>
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray text-center card-hover">
+                    <span class="text-4xl md:text-5xl font-black text-white block mb-2">+28%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Newsletter Click Rate</span>
+                    <span class="text-xs text-green-400 block mt-1">↑ from 3.2% to 4.1%</span>
+                </div>
+            </div>
+
+            <!-- Detailed Before/After Table -->
+            <div class="bg-cardBg rounded-2xl border border-borderGray overflow-hidden mb-8">
+                <div class="p-6 border-b border-borderGray">
+                    <h4 class="text-white font-bold text-lg">📊 Before vs After: Complete Metrics Comparison</h4>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-borderGray bg-darkBg/50">
+                                <th class="text-left p-4 text-gray-400 font-semibold">Metric</th>
+                                <th class="text-center p-4 text-gray-400 font-semibold">Before</th>
+                                <th class="text-center p-4 text-gray-400 font-semibold">After</th>
+                                <th class="text-center p-4 text-gray-400 font-semibold text-brandGold">Improvement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-borderGray">
+                                <td class="p-4 text-white font-medium">Avg. Engagement Rate</td>
+                                <td class="text-center p-4 text-red-400">0.8%</td>
+                                <td class="text-center p-4 text-green-400">3.4%</td>
+                                <td class="text-center p-4 text-brandGold font-bold">+325%</td>
+                            </tr>
+                            <tr class="border-b border-borderGray">
+                                <td class="p-4 text-white font-medium">Monthly Reach</td>
+                                <td class="text-center p-4 text-red-400">680K</td>
+                                <td class="text-center p-4 text-green-400">2.3M</td>
+                                <td class="text-center p-4 text-brandGold font-bold">+238%</td>
+                            </tr>
+                            <tr class="border-b border-borderGray">
+                                <td class="p-4 text-white font-medium">Click-Through Rate</td>
+                                <td class="text-center p-4 text-red-400">1.2%</td>
+                                <td class="text-center p-4 text-green-400">4.8%</td>
+                                <td class="text-center p-4 text-brandGold font-bold">+300%</td>
+                            </tr>
+                            <tr class="border-b border-borderGray">
+                                <td class="p-4 text-white font-medium">Follower Growth</td>
+                                <td class="text-center p-4 text-red-400">2.1%</td>
+                                <td class="text-center p-4 text-green-400">8.7%</td>
+                                <td class="text-center p-4 text-brandGold font-bold">+314%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-white font-medium">Cart Recovery Rate</td>
+                                <td class="text-center p-4 text-red-400">12%</td>
+                                <td class="text-center p-4 text-green-400">28%</td>
+                                <td class="text-center p-4 text-brandGold font-bold">+133%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Compliance & Strategy Insights -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray">
+                    <h4 class="text-white font-bold text-lg mb-2">✅ Key Compliance Recovery</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        By developing structured appeal drafts and maintaining highly optimized metadata safety checklists, we achieved a perfect track record for recovering falsely flagged product creatives (such as automated cosmetic policy flags) on Meta and TikTok platform dashboards without ad account disruption.
+                    </p>
+                </div>
+                <div class="bg-cardBg p-6 rounded-2xl border border-borderGray">
+                    <h4 class="text-white font-bold text-lg mb-2">📈 Key Learnings & Takeaways</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>• Visual consistency increases scroll-stop rate by <span class="text-brandGold">67%</span></li>
+                        <li>• Educational content drives <span class="text-brandGold">2.3x</span> more saves than promotional</li>
+                        <li>• UGC campaigns yield <span class="text-brandGold">5.8x</span> higher engagement</li>
+                        <li>• Monday-Wednesday posting yields best organic reach</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="py-20 bg-darkBg border-b border-borderGray">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-xs uppercase tracking-widest text-brandGold font-bold mb-3">08 / Let's Work Together</h2>
+            <h3 class="text-4xl md:text-5xl font-black text-white mb-6">Ready to Transform Your Brand?</h3>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+                I help brands stop posting and start positioning. Let's have an honest conversation about what that looks like for your brand.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="mailto:hello@salihazameer.com" class="bg-brandGold text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-all shadow-2xl shadow-brandGold/20 inline-flex items-center gap-2">
+                    📧 Book a Consultation
+                </a>
+                <a href="mailto:hello@salihazameer.com" class="border border-borderGray text-white px-8 py-4 rounded-full font-bold hover:border-brandGold transition-all inline-flex items-center gap-2">
+                    📩 Send an Email
+                </a>
+            </div>
+            <div class="flex flex-wrap gap-6 justify-center mt-8">
+                <a href="https://linkedin.com/in/saleha-zameer" target="_blank" class="text-gray-400 hover:text-brandGold text-sm transition-all">LinkedIn</a>
+                <a href="#" class="text-gray-400 hover:text-brandGold text-sm transition-all">Instagram</a>
+                <a href="mailto:hello@salihazameer.com" class="text-gray-400 hover:text-brandGold text-sm transition-all">Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-12 bg-darkBg text-center border-t border-borderGray">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-xs text-gray-500 mb-4 md:mb-0">
+                &copy; 2026 Social Media Strategy Portfolio. Developed to showcase professional growth for premium e-commerce ecosystems.
+            </p>
+            <div class="flex space-x-6">
+                <a href="https://gkhair.com" target="_blank" class="text-xs text-gray-400 hover:text-brandGold transition-all">GK Hair Official Store &rarr;</a>
+                <a href="#" class="text-xs text-gray-400 hover:text-brandGold transition-all">View More Case Studies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Scroll Reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
+```
