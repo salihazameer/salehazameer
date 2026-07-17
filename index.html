@@ -1869,6 +1869,29 @@
       * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
       .ticker-track { animation: none; }
     }
+
+	      /* ===== MOBILE HERO IMAGE ===== */
+    .hero-mobile-img {
+      display: none;
+      margin: 24px 0 32px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--bdr);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    .hero-mobile-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-mobile-img {
+        display: block;
+      }
+    }
+  </style>
+</head>
   </style>
 </head>
 <body>
@@ -1941,6 +1964,9 @@
       <div class="hero-status" data-reveal>
         <span class="dot"></span> Available for new projects
       </div>
+		<div class="hero-avatar-mobile" data-reveal>
+  <img src="Gemini_Generated_Image_tpgcostpgcostpgc.png" alt="Saliha Zameer" />
+</div>
       <h1 class="hero-name" data-reveal>
         SALIHA<br><span class="accent">ZAMEER</span>
       </h1>
