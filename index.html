@@ -1870,7 +1870,7 @@
       .ticker-track { animation: none; }
     }
 
-	      /* ===== MOBILE HERO IMAGE ===== */
+	        /* ===== MOBILE HERO IMAGE ===== */
     .hero-mobile-img {
       display: none;
       margin: 24px 0 32px;
@@ -1890,6 +1890,39 @@
         display: block;
       }
     }
+
+    /* ===== ADD THIS: MOBILE AVATAR (Circular) ===== */
+    .hero-avatar-mobile {
+      display: none;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--mint);
+      box-shadow: 0 0 50px var(--mint-glow);
+      margin: 0 auto 24px auto;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s var(--ease-spring);
+    }
+    .hero-avatar-mobile:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 80px var(--mint-glow);
+    }
+    .hero-avatar-mobile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-avatar-mobile {
+        display: block;
+      }
+    }
+  </style>
+</head>
   </style>
 </head>
   </style>
