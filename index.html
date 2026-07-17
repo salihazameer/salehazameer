@@ -1886,15 +1886,19 @@
     }
 
     /* ===== MOBILE AVATAR (Circular Profile) ===== */
+        /* ===== MOBILE AVATAR (Circular Profile) ===== */
     .hero-avatar-mobile {
-      display: none; /* ← HIDDEN ON DESKTOP */
+      display: none;
       width: 150px;
       height: 150px;
       border-radius: 50%;
       overflow: hidden;
       border: 3px solid var(--mint);
       box-shadow: 0 0 50px var(--mint-glow);
-      margin: 0 auto 24px auto;
+      
+      /* ← CHANGE THIS LINE */
+      margin: 0 auto 24px auto; /* ← Edit this */
+      
       position: relative;
       z-index: 2;
       transition: all 0.3s var(--ease-spring);
@@ -1917,7 +1921,6 @@
       }
       .hero-avatar-mobile {
         display: block;
-		  margin: 0 0 24px auto; /* ← Right aligned */
       }
     }
   </style>
