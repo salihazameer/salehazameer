@@ -147,6 +147,7 @@
       font-size: 1.2rem;
       letter-spacing: -0.02em;
       color: var(--cr);
+      text-decoration: none;
     }
     .logo span { color: var(--mint); }
     .nav-links {
@@ -161,6 +162,7 @@
       color: var(--cr3);
       transition: color 0.2s;
       position: relative;
+      text-decoration: none;
     }
     .nav-links a::after {
       content: '';
@@ -188,6 +190,86 @@
     }
     .burger svg { width: 20px; height: 20px; stroke: var(--cr); stroke-width: 1.8; }
     .nav-cv-btn { display: inline-flex; align-items: center; gap: 6px; }
+
+    /* ===== MOBILE NAVIGATION ENHANCEMENTS ===== */
+    .nav-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--bdr);
+      background: var(--bg2);
+      color: var(--cr);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-spring);
+      z-index: 10;
+    }
+    .nav-close:hover {
+      border-color: var(--mint);
+      background: var(--mint-glow);
+      transform: rotate(90deg);
+    }
+    .nav-close svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--cr);
+    }
+
+    .nav-mobile-logo {
+      display: none;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      color: var(--cr);
+      margin-bottom: 20px;
+    }
+    .nav-mobile-logo span {
+      color: var(--mint);
+    }
+
+    .nav-mobile-footer {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 280px;
+      margin-top: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--bdr);
+    }
+
+    .nav-mobile-socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .nav-mobile-socials a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--bdr);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--cr3);
+      text-decoration: none;
+      transition: all 0.3s var(--ease-spring);
+      font-style: normal;
+    }
+    .nav-mobile-socials a:hover {
+      border-color: var(--mint);
+      background: var(--mint-glow);
+      color: var(--mint);
+      transform: translateY(-2px);
+    }
 
     /* ----- BUTTONS ----- */
     .btn {
@@ -1891,7 +1973,16 @@
         margin: 0 0 16px 0;
       }
 
-      /* Navigation */
+      /* Navigation - Mobile Enhancements */
+      .nav-close {
+        display: flex;
+      }
+      .nav-mobile-logo {
+        display: block;
+      }
+      .nav-mobile-footer {
+        display: flex;
+      }
       .burger {
         display: flex;
       }
@@ -1903,20 +1994,34 @@
         backdrop-filter: blur(24px);
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 28px;
+        justify-content: flex-start;
+        gap: 12px;
         z-index: 99;
-        padding: 40px;
+        padding: 60px 32px 40px;
+        overflow-y: auto;
       }
       .nav-links.open {
         display: flex;
       }
       .nav-links a {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 600;
         color: var(--cr);
+        padding: 6px 0;
+        transition: all 0.2s;
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+      .nav-links a:hover {
+        color: var(--mint);
+        transform: translateX(8px);
+      }
+      .nav-links a::after {
+        display: none;
       }
       .nav-links .nav-cv-btn {
-        margin-top: 8px;
+        display: none;
       }
       .nav-right .magnet {
         display: none;
@@ -2567,20 +2672,40 @@
     <div class="nav-inner">
       <a href="#hero" class="logo">Saliha<span>.</span></a>
       <nav class="nav-links" id="navLinks">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#proof">Proof</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-        <a href="#" class="btn btn-outline btn-sm btn-cv nav-cv-btn" id="navCvBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
+        <!-- Close Button -->
+        <button class="nav-close" id="navClose" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-          CV
-        </a>
+        </button>
+
+        <!-- Logo inside menu -->
+        <div class="nav-mobile-logo">Saliha<span>.</span></div>
+
+        <a href="#hero" class="nav-link">🏠 Home</a>
+        <a href="#services">✦ Services</a>
+        <a href="#work">📂 Work</a>
+        <a href="#proof">📊 Proof</a>
+        <a href="#testimonials">💬 Testimonials</a>
+        <a href="#faq">❓ FAQ</a>
+        <a href="#contact">📞 Contact</a>
+        
+        <div class="nav-mobile-footer">
+          <a href="#" class="btn btn-primary btn-sm" id="navCvBtnMobile" style="width:100%; justify-content:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download CV
+          </a>
+          <div class="nav-mobile-socials">
+            <a href="mailto:hello@salihazameer.com" aria-label="Email">✉</a>
+            <a href="https://linkedin.com/in/saleha-zameer" target="_blank" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Instagram">📷</a>
+          </div>
+        </div>
       </nav>
       <div class="nav-right">
         <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
@@ -3380,6 +3505,15 @@
     const burger = document.getElementById('burgerBtn');
     const navLinks = document.getElementById('navLinks');
     const burgerIcon = document.getElementById('burgerIcon');
+    const navClose = document.getElementById('navClose');
+
+    function closeMobileMenu() {
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burgerIcon.innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"/>';
+      document.body.style.overflow = '';
+    }
+
     burger.addEventListener('click', () => {
       const open = navLinks.classList.toggle('open');
       burger.setAttribute('aria-expanded', open);
@@ -3388,14 +3522,30 @@
         '<path d="M3 6h18M3 12h18M3 18h18"/>';
       document.body.style.overflow = open ? 'hidden' : '';
     });
+
+    if (navClose) {
+      navClose.addEventListener('click', closeMobileMenu);
+    }
+
     navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        burgerIcon.innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"/>';
-        document.body.style.overflow = '';
-      });
+      a.addEventListener('click', closeMobileMenu);
     });
+
+    // ===== SWIPE TO CLOSE MOBILE MENU =====
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchEndX - touchStartX;
+      if (swipeDistance > 80 && navLinks.classList.contains('open')) {
+        closeMobileMenu();
+      }
+    }, { passive: true });
 
     // ===== SCROLL REVEALS =====
     const revealObserver = new IntersectionObserver((entries) => {
@@ -3518,7 +3668,7 @@
       e.preventDefault();
       alert('📄 Your CV download will start shortly.\n\n(Replace this with your actual CV PDF URL)');
     }
-    document.querySelectorAll('#heroCvBtn, #navCvBtn, #contactCvBtn, #footerCvBtn, #mobileCvBtn').forEach(btn => {
+    document.querySelectorAll('#heroCvBtn, #navCvBtn, #contactCvBtn, #footerCvBtn, #mobileCvBtn, #navCvBtnMobile').forEach(btn => {
       btn.addEventListener('click', handleCvDownload);
     });
 
